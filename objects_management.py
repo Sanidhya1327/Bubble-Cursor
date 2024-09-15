@@ -90,6 +90,7 @@ class ObjectManager:
             return True
         return False
 
+
     def check_two_targets_overlap(self, t1, t2):
         if math.hypot(t1.x - t2.x, t1.y - t2.y) > (t1.radius + t2.radius):
             return False
@@ -101,6 +102,6 @@ class ObjectManager:
         self.canvas.itemconfig(object_tag, fill="yellow", width=0)
 
 
-    def _euclidean_distance(self, point_1, point_2):
-        return math.hypot(point_1.x - point_2.x,
-                          point_1.y - point_2.y)
+    # def _euclidean_distance(self, point_1, point_2):
+    #     return math.hypot(point_1.x - point_2.x,
+    #                       point_1.y - point_2.y)
