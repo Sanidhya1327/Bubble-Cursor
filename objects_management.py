@@ -19,7 +19,7 @@ class ObjectManager:
         self.object_radius = object_radius
         self.objects = []  # store all objects
         self.object_tag_in_canvas = []  # store the tag of the objects in canvas
-        self.last_selected_object_index = 0
+        self.last_selected_object_index = -1
         self.should_generate_start_stop = should_generate_start_stop
         self.start_stop_distance = start_stop_distance
 
@@ -82,7 +82,8 @@ class ObjectManager:
                 i += 1
 
         self.paint_objects("green", distractor_objects)
-        self.objects.append(distractor_objects)
+        self.objects.extend(distractor_objects)
+        print(self.objects)
         return self.objects
 
     def is_in_frame(self, x, y):
