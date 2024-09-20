@@ -28,12 +28,17 @@ class ObjectManager:
             if self.last_selected_object_index != object_index:
                 last_object_tag = self.object_tag_in_canvas[self.last_selected_object_index]
                 # update object according to their tag
-                self.canvas.itemconfig(last_object_tag, fill="green", width=0)
+                if self.last_selected_object_index ==  0:
+                    self.canvas.itemconfig(last_object_tag, fill="blue", width=0)
+                elif self.last_selected_object_index == 1:
+                    self.canvas.itemconfig(last_object_tag, fill="red", width=0)
+                else:
+                    self.canvas.itemconfig(last_object_tag, fill="green", width=0)
                 self.last_selected_object_index = object_index
 
                 # object_tag is used to find the object in canvas, so that we can update the object
                 object_tag = self.object_tag_in_canvas[object_index]
-                self.canvas.itemconfig(object_tag, fill="red", outline="gray", width=4)  # red indicates the selected target
+                self.canvas.itemconfig(object_tag, fill="pink", outline="gray", width=4)  # red indicates the selected target
         else:  # no target has been selected, we change the previously selected target to green
             last_object_tag = self.object_tag_in_canvas[self.last_selected_object_index]
             # update object according to their tag
@@ -50,9 +55,7 @@ class ObjectManager:
 
     def generate_random_targets(self):
         if self.should_generate_start_stop:
-            start_object = Circle(random.randint(self.object_radius, self.window_width - self.object_radius),
-                                random.randint(self.object_radius, self.window_height - self.object_radius),
-                                self.object_radius)
+            start_object = Circle(self.object_radius, self.window_height-self.object_radius, self.object_radius)
             self.objects.append(start_object)
             self.paint_objects("blue" , [start_object])
             is_in_frame = False
@@ -73,6 +76,11 @@ class ObjectManager:
                                 self.object_radius)
             overlap = False
             for j in self.objects:
+                if self.check_two_targets_overlap(new_object, j):
+                    overlap = True
+                    break
+
+            for j in distractor_objects:
                 if self.check_two_targets_overlap(new_object, j):
                     overlap = True
                     break

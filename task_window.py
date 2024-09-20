@@ -16,7 +16,7 @@ class Application(tk.Frame):
 
         object_num = 20  # object total number
         object_radius = 20  # object radius
-        self.object_manage = om.ObjectManager(self.canvas, window_width, window_height, object_num, object_radius, True, 40)
+        self.object_manage = om.ObjectManager(self.canvas, window_width, window_height, object_num, object_radius, True, 512)
         objects = self.object_manage.generate_random_targets()
 
         self.cursor = area_cursor.AreaCursor(self.canvas, objects)
